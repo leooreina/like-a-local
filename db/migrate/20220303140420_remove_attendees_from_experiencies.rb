@@ -1,5 +1,5 @@
 class RemoveAttendeesFromExperiencies < ActiveRecord::Migration[6.1]
   def change
-    remove_column :experiencies, :attendees, :integer
+    remove_column :experiences, :attendees
   end
 end
