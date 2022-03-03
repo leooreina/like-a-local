@@ -13,6 +13,7 @@ class ExperiencesController < ApplicationController
 
   def create
     @experience = Experience.new(experience_params)
+    @experience.user = current_user
     @experience.save
 
     if @experience.save
@@ -47,5 +48,4 @@ class ExperiencesController < ApplicationController
       :duration
     )
   end
-
 end
