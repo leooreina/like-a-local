@@ -2,7 +2,7 @@
   <h1>Experiences</h1>
   <ul>
     <% @experiences.each do |experience| %>
-      <li><%=  experience.title %></li>
+      <li><%= link_to experience.title, experience_url(experience) %></li>
     <% end %>
   </ul>
 </div>
