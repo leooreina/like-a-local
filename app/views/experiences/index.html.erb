@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Experiences</h1>
+  <ul>
+    <% @experiences.each do |experience| %>
+      <li><%= link_to experience.title, experience_url(experience) %></li>
+    <% end %>
+  </ul>
+</div>
