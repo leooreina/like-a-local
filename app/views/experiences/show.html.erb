@@ -1,4 +1,6 @@
 <div class="container">
   <h1><%= @experience.title %></h1>
   <p><%= @experience.description %></p>
+
+  <%= link_to "New order", new_experience_order_path(@experience) %>
 </div>
