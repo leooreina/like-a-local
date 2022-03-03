@@ -21,6 +21,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    # @experience = Experience.find(params[:id])
+    @order = Order.find(params[:id])
+    @order.destroy
+    redirect_to root_path
+  end
+
   def show
     @order = Order.find(params[:id])
   end
