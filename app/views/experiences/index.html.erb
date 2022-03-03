@@ -1,14 +1,57 @@
-
-
 <div class="container">
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new">
+    Add an Experience
+  </button>
+
+
+
   <h1>Experiences</h1>
   <ul>
     <% @experiences.each do |experience| %>
-      <li><%= link_to experience.title, experience_url(experience) %>
-          <%= link_to "Remove", experience_path(experience),
+    <li><%= link_to experience.title, experience_url(experience) %>
+      <%= link_to "Remove", experience_path(experience),
                 method: :delete,
                 data: { confirm: "Are you sure?" } %> </li>
 
     <% end %>
   </ul>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="new" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h1>New Experience</h1>
+        <%= simple_form_for(@experience) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+        <div class="form-inputs">
+          <%= f.input :location, label: 'Meeting Point'%>
+          <%= f.input :title %>
+          <%= f.input :price %>
+          <%= f.input :description %>
+          <%= f.input :week_days, label: 'Which week days the experience is available?' %>
+          <%= f.input :starting_time %>
+          <%= f.input :duration, label: 'How long last the experience?' %>
+          <%= f.button :submit, class: 'btn btn-outline-dark' %>
+
+          <% end  %>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
 </div>

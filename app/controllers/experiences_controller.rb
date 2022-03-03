@@ -1,5 +1,6 @@
 class ExperiencesController < ApplicationController
   def index
+    @experience = Experience.new
     @experiences = Experience.all
   end
 
