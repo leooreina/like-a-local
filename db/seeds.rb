@@ -13,7 +13,7 @@ Experience.create!(
   price: 50,
   description: "Drink until the end of the days",
   week_days: "Monday",
-  starting_time: 20,
+  starting_time: Time.new(2022, 01, 01, 2, 2, 2, "+02:00"),
   duration: 3,
   user_id: 1
 )
@@ -24,7 +24,7 @@ Experience.create!(
   price: 10,
   description: "Cycle around the avenue and get your phone stoled",
   week_days: "Sunday",
-  starting_time: 16,
+  starting_time: Time.new(2022, 01, 01, 2, 2, 2, "+02:00"),
   duration: 1,
   user_id: 1
 )
@@ -35,7 +35,7 @@ Experience.create!(
   price: 10,
   description: "Go around this cool neighbourhood",
   week_days: "Saturday",
-  starting_time: 19,
+  starting_time: Time.new(2022, 01, 01, 2, 2, 2, "+02:00"),
   duration: 2,
   user_id: 2
 )
