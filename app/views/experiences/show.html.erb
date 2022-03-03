@@ -5,7 +5,11 @@
   <p><strong>Availability: </strong><%= @experience.week_days %></p>
   <p><strong>Duration:</strong> <%= @experience.duration %> Hours </p>
   <p><strong>Starting time:</strong> <%= @experience.starting_time.strftime("%H:%M") %></p>
-
+  <% if @experience.photo.attached? %>
+    <%= cl_image_tag @experience.photo.key, height: 300, width: 400, crop: :fill %>
+  <% else %>
+    <p><strong>No images for this experience</strong></p>
+  <% end %>
   <%= link_to "New order", new_experience_order_path(@experience) %>
 
 </div>

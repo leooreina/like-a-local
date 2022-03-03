@@ -23,7 +23,6 @@ class ExperiencesController < ApplicationController
     end
   end
 
-
   def edit
     @experience = Experience.find(params[:id])
   end
@@ -52,7 +51,8 @@ class ExperiencesController < ApplicationController
       :description,
       :week_days,
       :starting_time,
-      :duration
+      :duration,
+      :photo
     )
   end
 end
