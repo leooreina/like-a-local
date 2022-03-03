@@ -4,4 +4,6 @@
   <p><strong>Price: </strong>R$<%= @experience.price %>0</p>
   <p><strong>Availability: </strong><%= @experience.week_days %></p>
   <p><strong>Duration:</strong> <%= @experience.duration %> Hours </p>
+
+  <%= link_to "New order", new_experience_order_path(@experience) %>
 </div>
