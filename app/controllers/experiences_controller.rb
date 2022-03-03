@@ -23,6 +23,7 @@ class ExperiencesController < ApplicationController
     end
   end
 
+
   def edit
     @experience = Experience.find(params[:id])
   end
@@ -32,6 +33,12 @@ class ExperiencesController < ApplicationController
     @experience.update(experience_params)
 
     redirect_to experience_path(@experience)
+  end
+
+  def destroy
+    @experience = Experience.find(params[:id])
+    @experience.destroy
+    redirect_to root_path
   end
 
   private
