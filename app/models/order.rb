@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  belongs_to :experiences
-  belongs_to :users
+  belongs_to :experience
+  belongs_to :user
   validates :attendees, presence: true
 end

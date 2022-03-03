@@ -1,0 +1,7 @@
+<div class="container my-3 px-5">
+  <h2>Add a order</h2>
+  <%= simple_form_for [@experience, @order] do |f| %>
+    <%= f.input :attendees, placeholder: 'Add number of people' %>
+    <%= f.button :submit, class: "btn btn-flat" %>
+  <% end %>
+</div>
