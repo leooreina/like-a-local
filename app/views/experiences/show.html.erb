@@ -7,5 +7,5 @@
   <p><strong>Starting time:</strong> <%= @experience.starting_time.strftime("%H:%M") %></p>
 
   <%= link_to "New order", new_experience_order_path(@experience) %>
-  <%= link_to "Back", root_path %>
+  <%= link_to "Back", experience_url(@experience) %>
 </div>
