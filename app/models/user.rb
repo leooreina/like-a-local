@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :experiences, dependent: :destroy
   has_many :orders, dependent: :destroy
-  has_one_attached :photo
+  has_one_attached :avatar
   validates :name, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
