@@ -1,27 +1,47 @@
-<div class="container">
-  <h1><%= @experience.title %></h1>
+<% if @experience.photo.attached? %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @experience.photo.key %>)">
+    <div class="container">
+      <h1><%= @experience.title %></h1>
+    </div>
+  </div>
+<% else %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path("trip-image.jpeg") %>)">
+    <div class="container">
+      <h1><%= @experience.title %></h1>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+
+<div class="show-body">
+
+<div class="container row mt-5">
   <h4><%= @experience.description %></h4>
   <p><strong>Price: </strong>R$<%= @experience.price %>0</p>
   <p><strong>Availability: </strong><%= @experience.week_days %></p>
   <p><strong>Duration:</strong> <%= @experience.duration %> Hours </p>
   <p><strong>Starting time:</strong> <%= @experience.starting_time.strftime("%H:%M") %></p>
-  <% if @experience.photo.attached? %>
-    <%= cl_image_tag @experience.photo.key, height: 300, width: 400, crop: :fill %>
-  <% else %>
-    <p><strong>No images for this experience</strong></p>
-  <% end %>
-  <%= link_to "New order", new_experience_order_path(@experience) %>
-  <%= link_to "Back", root_path %>
+
 </div>
 
 
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new">
-    Edit Experience
+
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order">
+    New Order
   </button>
+
+
+<%#
         <%= link_to "Remove", experience_path,
                 method: :delete,
-                data: { confirm: "Are you sure?" } %> </li>
+                data: { confirm: "Are you sure?" } %>
 
+</div>
 
 <div class="modal fade" id="new" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -45,6 +65,38 @@
           <%= f.input :duration, label: 'How long last the experience?' %>
           <%= f.input :photo, as: :file %>
           <%= f.button :submit, class: 'btn btn-outline-dark' %>
+
+          <% end  %>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h1>New Order</h1>
+
+
+
+    <%= simple_form_for [@experience, @order] do |f| %>
+    <%= f.input :attendees, placeholder: 'Add number of people' %>
+    <%= f.button :submit, class: 'btn btn-outline-dark' %>
 
           <% end  %>
 
