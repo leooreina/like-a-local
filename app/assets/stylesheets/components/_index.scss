@@ -2,3 +2,16 @@
 @import "alert";
 @import "avatar";
 @import "navbar";
+
+
+
+
+.show-body {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.my-container {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+}

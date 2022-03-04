@@ -1,9 +1,14 @@
 <div class="banner"
-
   style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path @experience.photo.key %>)">
 
   <div class="container">
     <h1><%= @experience.title %></h1>
+  </div>
+
+  <div class="place-me mt-5">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order">
+      Order now!
+    </button>
   </div>
 
 </div>
@@ -12,23 +17,29 @@
 
 
 
-<div class="show-body">
+<div class="show-body mb-5">
 
-<div class="container row mt-5">
-  <h4><%= @experience.description %></h4>
-  <p><strong>Price: </strong>R$<%= @experience.price %>0</p>
-  <p><strong>Availability: </strong><%= @experience.week_days %></p>
-  <p><strong>Duration:</strong> <%= @experience.duration %> Hours </p>
-  <p><strong>Starting time:</strong> <%= @experience.starting_time.strftime("%H:%M") %></p>
+  <div class="my-container">
+
+    <div class="container row mt-5">
+      <p><strong>Price: </strong>R$<%= @experience.price %>0</p>
+      <p><strong>Availability: </strong><%= @experience.week_days %></p>
+      <p><strong>Duration:</strong> <%= @experience.duration %> Hours </p>
+      <p><strong>Starting time:</strong> <%= @experience.starting_time.strftime("%H:%M") %></p>
+    </div>
+
+    <div class="container row mt-5">
+      <h4><%= @experience.description %></h4>
+    </div>
+
+  </div>
 
 </div>
 
 
 
 
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order">
-    New Order
-  </button>
+
 
 
 <%#
@@ -42,11 +53,10 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Experience</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h1>New Experience</h1>
         <%= simple_form_for(@experience) do |f| %>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -81,26 +91,25 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Order</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h1>New Order</h1>
 
 
 
-    <%= simple_form_for [@experience, @order] do |f| %>
-    <%= f.input :attendees, placeholder: 'Add number of people' %>
-    <%= f.button :submit, class: 'btn btn-outline-dark' %>
+        <%= simple_form_for [@experience, @order] do |f| %>
+        <%= f.input :attendees, placeholder: 'Add number of people' %>
+        <%= f.button :submit, class: 'btn btn-outline-dark' %>
 
-          <% end  %>
-
-        </div>
+        <% end  %>
 
       </div>
 
     </div>
 
-
   </div>
+
+
+</div>
 </div>
