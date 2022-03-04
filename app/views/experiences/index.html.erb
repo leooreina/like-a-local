@@ -1,23 +1,32 @@
 <div class="container">
-
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new">
-    Add an Experience
-  </button>
-
-
-
   <h1>Experiences</h1>
-  <ul>
-    <% @experiences.each do |experience| %>
-    <li><%= link_to experience.title, experience_url(experience) %>
-      <%= link_to "Remove", experience_path(experience),
-                method: :delete,
-                data: { confirm: "Are you sure?" } %> </li>
 
-    <% end %>
-  </ul>
+
+<% @experiences.each do |experience| %>
+<div class="card-trip">
+  <% if experience.photo.attached? %>
+  <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
+  <% else %>
+  <p><strong>No images for this experience</strong></p>
+  <% end %>
+  <div class="card-trip-infos">
+    <div>
+      <h2><%= experience.title  %></h2>
+      <p><%= experience.description  %></p>
+      <%= link_to "Show more", experience_url(experience) %>
+    </div>
+    <h2 class="card-trip-pricing"><%= experience.price  %></h2>
+    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+  </div>
 </div>
+<% end %>
+
+</div>
+
+
+
+
+
 
 
 
