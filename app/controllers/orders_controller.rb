@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
     @order.user = current_user
 
     if @order.save
-      redirect_to experience_order_path(params[:experience_id], @order), notice: 'Order was successfully created.'
+      redirect_to experience_path(@experience), notice: 'Order was successfully created.'
     else
       render :new
     end
