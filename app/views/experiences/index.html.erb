@@ -1,26 +1,33 @@
-<div class="container">
+<div class="container my-3 px-5">
   <h1>Experiences</h1>
-
-
-<% @experiences.each do |experience| %>
-<div class="card-trip">
-  <% if experience.photo.attached? %>
-  <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
-  <% else %>
-  <p><strong>No images for this experience</strong></p>
-  <% end %>
-  <div class="card-trip-infos">
-    <div>
-      <h2><%= experience.title  %></h2>
-      <p><%= experience.description  %></p>
-      <%= link_to "Show more", experience_url(experience) %>
+  <div class="cards mb-5">
+    <% @experiences.each do |experience| %>
+    <div class="card-trip">
+      <% if experience.photo.attached? %>
+        <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
+      <% else %>
+        <%= image_tag "no-image-found.png", height: 300, width: 400, crop: :fill %>
+      <% end %>
+      <div class="card-trip-infos">
+        <div>
+          <h2><%= experience.title  %></h2>
+          <p><%= experience.description  %></p>
+          <%= link_to "Show more", experience_url(experience) %>
+        </div>
+        <h2 class="card-trip-pricing"><%= experience.price  %></h2>
+        <% if current_user && current_user.avatar.attached? %>
+          <% if experience.user.avatar.attached? %>
+            <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar-bordered" %>
+          <% else %>
+            <%= image_tag "avatar.webp", class: "card-trip-user avatar-bordered" %>
+          <% end %>
+        <% else %>
+          <%= image_tag "avatar.webp", class: "card-trip-user avatar-bordered" %>
+        <% end %>
+      </div>
     </div>
-    <h2 class="card-trip-pricing"><%= experience.price  %></h2>
-    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+    <% end %>
   </div>
-</div>
-<% end %>
-
 </div>
 
 
@@ -53,15 +60,9 @@
           <%= f.input :duration, label: 'How long last the experience?' %>
           <%= f.input :photo, as: :file %>
           <%= f.button :submit, class: 'btn btn-outline-dark' %>
-
           <% end  %>
-
         </div>
-
       </div>
-
     </div>
-
-
   </div>
 </div>
