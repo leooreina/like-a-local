@@ -11,9 +11,6 @@
   <ul>
     <% @experiences.each do |experience| %>
     <li><%= link_to experience.title, experience_url(experience) %>
-      <%= link_to "Remove", experience_path(experience),
-                method: :delete,
-                data: { confirm: "Are you sure?" } %> </li>
 
     <% end %>
   </ul>
