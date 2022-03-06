@@ -1,24 +1,26 @@
 class ExperiencesController < ApplicationController
+  before_action :set_experience, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
     @experience = Experience.new
-    @experiences = Experience.all
+    @experiences = policy_scope(Experience).order(created_at: :desc)
   end
 
   def show
-    @experience = Experience.find(params[:id])
     @order = Order.new
   end
 
   def new
     @experience = Experience.new
+    authorize @experience
   end
 
   def create
     @experience = Experience.new(experience_params)
     @experience.user = current_user
-    @experience.save
+
+    authorize @experience
 
     if @experience.save
       redirect_to @experience, notice: 'Experience was successfully created.'
@@ -27,24 +29,25 @@ class ExperiencesController < ApplicationController
     end
   end
 
-  def edit
-    @experience = Experience.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @experience = Experience.find(params[:id])
     @experience.update(experience_params)
 
     redirect_to experience_path(@experience)
   end
 
   def destroy
-    @experience = Experience.find(params[:id])
     @experience.destroy
     redirect_to root_path
   end
 
   private
+
+  def set_experience
+    @experience = Experience.find(params[:id])
+    authorize @experience
+  end
 
   def experience_params
     params.require(:experience).permit(
