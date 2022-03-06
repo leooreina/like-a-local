@@ -40,12 +40,8 @@
           <%= link_to "Show more", experience_url(experience) %>
         </div>
         <h2 class="card-trip-pricing">R$<%= experience.price  %>0</h2>
-        <% if current_user && current_user.avatar.attached? %>
-          <% if experience.user.avatar.attached? %>
-            <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar", alt: "avatar"%>
-          <% else %>
-            <%= image_tag "avatar.webp", class: "card-trip-user avatar-bordered" %>
-          <% end %>
+        <% if experience.user.avatar.attached? %>
+          <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar", alt: "avatar"%>
         <% else %>
           <%= image_tag "avatar.webp", class: "card-trip-user avatar-bordered" %>
         <% end %>
