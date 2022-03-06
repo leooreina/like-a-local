@@ -12,17 +12,16 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <% if @experience.title? %>
+            <% if @experience && @experience.title %>
               <span class="nav-link" data-bs-toggle="modal" data-bs-target="#new" role="button">
                 Edit Experience
               </span>
-          <li class="nav-item" role="button">
-            <%= link_to "Delete Experience",
-            experience_path,
-                method: :delete,
-                data: { confirm: "Are you sure?" },
-                class: "nav-link" %>
-          </li>
+              <li class="nav-item" role="button">
+                <%= link_to "Delete Experience", experiences_path,
+                    method: :delete,
+                    data: { confirm: "Are you sure?" },
+                    class: "nav-link" %>
+              </li>
             <% else %>
               <span class="nav-link" data-bs-toggle="modal" data-bs-target="#new" role="button">
                 Offer an experience
