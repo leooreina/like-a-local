@@ -1,0 +1,32 @@
+<div class="container my-3 px-5">
+  <h1 class="my-5">My experiences</h1>
+
+  <div class="cards mb-5">
+    <% if current_user.experiences && current_user.experiences.length > 0 %>
+      <% current_user.experiences.each do |experience| %>
+      <div class="card-trip">
+        <% if experience.photo.attached? %>
+          <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
+        <% else %>
+          <%= image_tag "no-image-found.png", height: 300, width: 400, crop: :fill %>
+        <% end %>
+        <div class="card-trip-infos">
+          <div>
+            <h2><%= experience.title  %></h2>
+            <p><%= experience.description  %></p>
+            <%= link_to "My orders", experience_orders_path(experience) %>
+          </div>
+          <h2 class="card-trip-pricing">R$<%= experience.price  %>0</h2>
+          <% if experience.user.avatar.attached? %>
+            <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar", alt: "avatar"%>
+          <% else %>
+            <%= image_tag "avatar.webp", class: "card-trip-user avatar-bordered" %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    <% else %>
+      <p>No experiences registered yet.</p>
+    <% end %>
+  </div>
+</div>

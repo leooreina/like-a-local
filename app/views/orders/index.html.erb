@@ -1,6 +1,22 @@
 <div class="container">
-  <h1>Orders</h1>
-  <% @orders.each do |order| %>
-    <%= order %>
+  <h2>My orders</h2>
+  <% if current_user.orders.where(experience_id: params[:experience_id]).length > 0 %>  
+    <ul>
+      <% current_user.orders.where(experience_id: params[:experience_id]).each do |order| %>
+        <li>
+          <p>
+            <span>Attendees: <%= order.attendees %></span>
+            <%= link_to "Remove", experience_order_path(order.experience.id, order),
+              method: :delete,
+              data: { confirm: "Are you sure?" }
+            %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No orders yet.</p>
   <% end %>
+
+  <%= link_to "Back", my_experiences_path %>
 </div>
