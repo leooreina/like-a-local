@@ -45,22 +45,9 @@
 
   <div class="cards mb-5">
     <% @experiences.each do |experience| %>
-    <div class="card-trip">
-      <% if experience.photo.attached? %>
-        <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
-      <% else %>
-        <%= image_tag "no-image-found.png", height: 300, width: 400, crop: :fill %>
-      <% end %>
-      <div class="card-trip-infos">
-        <div>
-          <h2><%= experience.title  %></h2>
-          <p> <strong> <%= experience.city %> </strong> </p>
-          <p><%= experience.description[0..90] %>... </p>
-          <%= link_to "Show more", experience_url(experience) %>
-        </div>
-        <h2 class="card-trip-pricing">R$<%= sprintf("%.2f", experience.price) %></h2>
-        <% if experience.user.avatar.attached? %>
-          <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar", alt: "avatar"%>
+      <div class="card-trip">
+        <% if experience.photo.attached? %>
+          <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
         <% else %>
           <%= image_tag "no-image-found.png", height: 300, width: 400, crop: :fill %>
         <% end %>
@@ -68,6 +55,7 @@
           <div>
             <h2><%= experience.title  %></h2>
             <p> <strong> <%= experience.location %> </strong> </p>
+            <p> <strong> <%= experience.city %> </strong> </p>
             <p><%= experience.description[0..90] %>... </p>
             <%= link_to "Show more", experience_url(experience) %>
           </div>

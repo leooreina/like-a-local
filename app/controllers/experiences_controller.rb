@@ -5,18 +5,14 @@ class ExperiencesController < ApplicationController
   def index
     @experience = Experience.new
     @experiences = policy_scope(Experience).order(created_at: :desc)
-    @markers = @experiences.geocoded.map do |experience|
-      {
-        lat: experience.latitude,
-        lng: experience.longitude
-      }
-    end
-
     if params[:query].present?
       @experiences = Experience.search_by_city(params[:query])
+      set_markers
     else
-      @experiences = Experience.all
+      @experiences = policy_scope(Experience).order(created_at: :desc)
+      set_markers
     end
+
   end
 
   def show
@@ -59,6 +55,15 @@ class ExperiencesController < ApplicationController
   def set_experience
     @experience = Experience.find(params[:id])
     authorize @experience
+  end
+
+  def set_markers
+    @markers = @experiences.geocoded.map do |experience|
+      {
+        lat: experience.latitude,
+        lng: experience.longitude
+      }
+    end
   end
 
   def experience_params
