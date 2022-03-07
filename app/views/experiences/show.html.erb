@@ -4,7 +4,7 @@
       <h1><%= @experience.title %></h1>
     </div>
     <div class="place-me mt-5">
-      <% if current_user.id != @experience.user_id %>
+      <% if user_signed_in? && current_user.id != @experience.user_id %>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order">
           Order now!
         </button>
@@ -17,9 +17,11 @@
       <h1><%= @experience.title %></h1>
     </div>
     <div class="place-me mt-5">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order">
-        Order now!
-      </button>
+      <% if user_signed_in? && current_user.id != @experience.user_id %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order">
+          Order now!
+        </button>
+      <% end %>
     </div>
   </div>
 <% end %>
