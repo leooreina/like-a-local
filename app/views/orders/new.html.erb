@@ -3,6 +3,7 @@
   <%= simple_form_for [@experience, @order] do |f| %>
     <%= f.input :attendees, placeholder: 'Add number of people' %>
     <%= f.button :submit, class: "btn btn-flat" %>
+    <%= f.input :date, as: :date, html5: true %>
   <% end %>
    <%= link_to "Back", experience_url(@experience) %>
 </div>
