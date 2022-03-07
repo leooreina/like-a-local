@@ -21,22 +21,29 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
-.home-banner {
-  background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=821&q=80');
-  background-size: cover;
+#my-banner {
   height: 100vh;
-  color: #000;
+  color: rgb(255, 255, 255);
   text-align: center;
   padding-top: 40vh;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
   font-weight: bolder;
 
   h1 {
-  font-size: 60px;
+  font-size: 80px;
   font-weight: bolder;
   }
 }
 
 #my-banner h3 {
     color: #fff;
+    font-size: 45px;
+  }
+
+  #show-banner {
+    height: 55vh;
+
+    h1 {
+      font-size: 50px;
+    }
   }
