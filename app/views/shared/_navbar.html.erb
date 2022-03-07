@@ -46,9 +46,6 @@
             </div>
           </li>
 
-
-          <%= render 'shared/modal_experience' %>
-
         <% else %>
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
@@ -58,3 +55,5 @@
     </div>
   </div>
 </div>
+
+<%= render 'shared/modal_experience' %>
