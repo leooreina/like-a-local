@@ -12,7 +12,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <% if @experience && @experience.title %>
+            <% if @experience && policy(@experience).edit? && policy(@experience).destroy? %>
               <span class="nav-link" data-bs-toggle="modal" data-bs-target="#new" role="button">
                 Edit Experience
               </span>
