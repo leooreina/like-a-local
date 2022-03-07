@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-experiences">
   <% if current_user.id != @experience.user_id %>
     <h2>My orders</h2>
   <% else %>
@@ -9,7 +9,9 @@
     <% @orders.where(experience_id: params[:experience_id]).each do |order| %>
       <div class="notification w-50">
         <div class="notification-content">
-          <p><small>14th January</small></p>
+          <% if order.date %>
+            <p><small><%= order.date.strftime('%dth %B') %></small></p>
+          <% end %>
           <p><%= order.attendees %> attendees. Criado por: <%= @users.where(id: order.user_id).first.name %></p>
         </div>
 
