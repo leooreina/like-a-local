@@ -36,10 +36,11 @@
       <div class="card-trip-infos">
         <div>
           <h2><%= experience.title  %></h2>
-          <p><%= experience.description  %></p>
+          <p> <strong> <%= experience.location %> </strong> </p>
+          <p><%= experience.description[0..90] %>... </p>
           <%= link_to "Show more", experience_url(experience) %>
         </div>
-        <h2 class="card-trip-pricing">R$<%= experience.price  %>0</h2>
+        <h2 class="card-trip-pricing">R$<%= sprintf("%.2f", experience.price) %></h2>
         <% if experience.user.avatar.attached? %>
           <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar", alt: "avatar"%>
         <% else %>

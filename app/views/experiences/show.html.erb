@@ -29,7 +29,7 @@
   <div class="my-container">
     <div class="container row mt-5">
       <p><strong>Location:</strong> <%= @experience.location %></p>
-      <p><strong>Price: </strong>R$<%= @experience.price %>0</p>
+      <p><strong>Price: </strong>R$<%= sprintf("%.2f", @experience.price) %></p>
       <p><strong>Availability: </strong><%= @experience.week_days %></p>
       <p><strong>Duration:</strong><%= @experience.duration > 1 ? " #{@experience.duration} hours" : " #{@experience.duration} hour" %></p>
       <p><strong>Starting time:</strong> <%= @experience.starting_time.strftime("%H:%M") %></p>
