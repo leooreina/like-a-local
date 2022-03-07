@@ -5,6 +5,12 @@ class ExperiencesController < ApplicationController
   def index
     @experience = Experience.new
     @experiences = policy_scope(Experience).order(created_at: :desc)
+    @markers = @experiences.geocoded.map do |experience|
+      {
+        lat: experience.latitude,
+        lng: experience.longitude
+      }
+    end
   end
 
   def show
