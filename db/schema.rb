@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2022_03_07_192012) do
     t.time "starting_time"
     t.float "latitude"
     t.float "longitude"
+    t.string "city"
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 

@@ -7,4 +7,11 @@ class Experience < ApplicationRecord
 
   validates :location, :title, :price, :description, presence: true
   validates :week_days, :starting_time, :duration, presence: true
+
+  include PgSearch::Model
+  pg_search_scope :search_by_city,
+    against: [ :city ],
+    using: {
+      tsearch: { prefix: true }
+    }
 end
