@@ -1,0 +1,60 @@
+<div class="container my-3 px-5">
+  <h1 class="my-5">My experiences</h1>
+
+  <div class="cards mb-5">
+    <% if current_user.experiences && current_user.experiences.length > 0 %>
+      <% current_user.experiences.each do |experience| %>
+      <div class="card-trip">
+        <% if experience.photo.attached? %>
+          <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
+        <% else %>
+          <%= image_tag "no-image-found.png", height: 300, width: 400, crop: :fill %>
+        <% end %>
+        <div class="card-trip-infos">
+          <div>
+            <h2><%= experience.title  %></h2>
+            <p><%= experience.description  %></p>
+            <% if current_user.id != experience.user_id %>
+              <%= link_to "My orders", experience_orders_path(experience) %>
+            <% else %>
+              <%= link_to "Orders", experience_orders_path(experience) %>
+            <% end %>
+          </div>
+          <h2 class="card-trip-pricing">R$<%= experience.price  %>0</h2>
+          <% if experience.user.avatar.attached? %>
+            <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar", alt: "avatar"%>
+          <% else %>
+            <%= image_tag "avatar.webp", class: "card-trip-user avatar-bordered" %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    <% else %>
+      <p>No experiences registered yet.</p>
+    <% end %>
+  </div>
+
+  <h1 class="my-5">My orders</h1>
+
+  <% if current_user.orders.length > 0 %>
+    <% current_user.orders.each do |order| %>
+      <h5><%= order.experience.title %></h5>
+      <div class="notification w-50">
+        <div class="notification-content">
+          <p><small>14th January</small></p>
+          <p><%= order.attendees %> attendees.</p>
+        </div>
+
+        <div class="notification-actions">
+          <%= link_to experience_order_path(order.experience_id, order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No orders registered yet.</p>
+  <% end %>
+
+  <%= render 'shared/modal_experience' %>
+</div>

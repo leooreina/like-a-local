@@ -1,11 +1,14 @@
 class OrdersController < ApplicationController
   def index
-    @orders = Order.all
+    @users = User.all
+    @experience = Experience.find(params[:experience_id])
+    @orders = policy_scope(Order).order(created_at: :desc)
   end
 
   def new
     @experience = Experience.find(params[:experience_id])
     @order = Order.new
+    authorize @order
   end
 
   def create
@@ -13,25 +16,31 @@ class OrdersController < ApplicationController
     @experience = Experience.find(params[:experience_id])
     @order.experience = @experience
     @order.user = current_user
+    authorize @order
 
     if @order.save
-      redirect_to experience_path(@experience), notice: 'Order was successfully created.'
+      redirect_to my_experiences_path, notice: 'Order was successfully created.'
     else
       render :new
     end
   end
 
   def destroy
-    @order = Order.find(params[:id])
+    set_order
     @order.destroy
-    redirect_to root_path
+    redirect_to my_experiences_path
   end
 
   def show
-    @order = Order.find(params[:id])
+    set_order
   end
 
   private
+
+  def set_order
+    @order = Order.find(params[:id])
+    authorize @order
+  end
 
   def order_params
     params.require(:order).permit(:attendees, :date, :experience_id, :user_id)
