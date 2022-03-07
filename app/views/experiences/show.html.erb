@@ -53,7 +53,9 @@
       <div class="modal-body">
         <%= simple_form_for [@experience, @order] do |f| %>
         <%= f.input :attendees, placeholder: 'Add number of people' %>
+        <%= f.input :date, as: :date, html5: true %>
         <%= f.button :submit, class: 'btn btn-outline-dark' %>
+
         <% end  %>
       </div>
     </div>
