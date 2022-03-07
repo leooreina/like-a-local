@@ -8,4 +8,13 @@ class Experience < ApplicationRecord
 
   validates :title, length: { minimum: 5 }
   validates :duration, inclusion: { in: (1..12) }
+
+  include PgSearch::Model
+  pg_search_scope :search_by_city,
+    against: [ :city ],
+    using: {
+      tsearch: { prefix: true }
+    }
+
+
 end
