@@ -4,9 +4,11 @@
       <h1><%= @experience.title %></h1>
     </div>
     <div class="place-me mt-5">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order">
-        Order now!
-      </button>
+      <% if current_user.id != @experience.user_id %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order">
+          Order now!
+        </button>
+      <% end %>
     </div>
   </div>
 <% else %>
@@ -35,7 +37,7 @@
       <p><strong>Starting time:</strong> <%= @experience.starting_time.strftime("%H:%M") %></p>
     </div>
 
-    <div class="container row mt-5">
+    <div class="container mt-5">
       <h5><%= @experience.description %></h5>
     </div>
   </div>
