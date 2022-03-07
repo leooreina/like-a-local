@@ -7,6 +7,9 @@
     </div>
 
 <div class="search-bar d-flex justify-content-center">
+
+
+
   <div class="form-search">
   <%= form_tag "/experiences#all-cards", method: :get do %>
   <%= text_field_tag :query,
@@ -69,6 +72,8 @@
       </div>
     <% end %>
   </div>
+
+
 
   <div class="map" style="height: 600px;"
     data-controller="mapbox"
