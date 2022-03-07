@@ -1,0 +1,9 @@
+.experiences-list {
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+.map {
+  z-index: -1;
+  margin: 10px;
+}
