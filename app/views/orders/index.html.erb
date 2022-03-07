@@ -1,6 +1,31 @@
 <div class="container">
-  <h1>Orders</h1>
-  <% @orders.each do |order| %>
-    <%= order %>
+  <% if current_user.id != @experience.user_id %>
+    <h2>My orders</h2>
+  <% else %>
+    <h2>Orders registered</h2>
   <% end %>
+  <% if @orders.where(experience_id: params[:experience_id]).length > 0 %>
+    <h5><%= @experience.title %></h5>
+    <% @orders.where(experience_id: params[:experience_id]).each do |order| %>
+      <div class="notification w-50">
+        <div class="notification-content">
+          <p><small>14th January</small></p>
+          <p><%= order.attendees %> attendees. Criado por: <%= @users.where(id: order.user_id).first.name %></p>
+        </div>
+
+        <div class="notification-actions">
+          <%= link_to experience_order_path(params[:experience_id], order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No orders registered yet.</p>
+  <% end %>
+
+  <% if current_user.id != @experience.user_id %>
+    <%= link_to "Add", experience_path(params[:experience_id]) %>
+  <% end %>
+  <%= link_to "Back", my_experiences_path %>
 </div>

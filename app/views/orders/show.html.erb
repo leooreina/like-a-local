@@ -1,7 +1,10 @@
 <div class="container">
- <li><p>Attendees: <%= @order.attendees %></p>
-      <%= link_to "Remove", experience_order_path(@order),
-                method: :delete,
-                data: { confirm: "Are you sure?" } %></li>
-              <%= link_to "Back", root_path %>
+ <li>
+    <p>Attendees: <%= @order.attendees %></p>
+    <%= link_to "Remove", experience_order_path(@order),
+      method: :delete,
+      data: { confirm: "Are you sure?" } 
+    %>
+  </li>
+  <%= link_to "Back", root_path %>
 </div>
