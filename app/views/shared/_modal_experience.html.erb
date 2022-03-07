@@ -1,41 +1,41 @@
-          <div class="modal fade" id="new" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
+<div class="modal fade" id="new" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
 
-                  <% if @experience && @experience.title? %>
-                    <h5 class="modal-title" id="exampleModalLabel">Edit this Experience</h5>
-                  <% else %>
-                    <h5 class="modal-title" id="exampleModalLabel">Offer an Experience</h5>
-                  <% end %>
+        <% if @experience && @experience.title? %>
+          <h5 class="modal-title" id="exampleModalLabel">Edit this Experience</h5>
+        <% else %>
+          <h5 class="modal-title" id="exampleModalLabel">Offer an Experience</h5>
+        <% end %>
 
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <% if @experience %>
-                  <div class="modal-body">
-                    <%= simple_form_for(@experience) do |f| %>
-                    <%= f.error_notification %>
-                    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-                    <div class="form-inputs">
-                      <%= f.input :location, label: 'Meeting Point'%>
-                      <%= f.input :title %>
-                      <%= f.input :price %>
-                      <%= f.input :description %>
-                      <%= f.input :week_days, label: 'Which week days the experience is available?' %>
-                      <%= f.input :starting_time %>
-                      <%= f.input :duration, label: 'How long last the experience?' %>
-                      <%= f.input :photo, as: :file %>
-                      <%= f.button :submit, class: 'btn btn-outline-dark' %>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <% if @experience %>
+        <div class="modal-body">
+          <%= simple_form_for(@experience) do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <div class="form-inputs">
+            <%= f.input :location, label: 'Meeting Point'%>
+            <%= f.input :title %>
+            <%= f.input :price %>
+            <%= f.input :description %>
+            <%= f.input :week_days, label: 'Which week days the experience is available?' %>
+            <%= f.input :starting_time %>
+            <%= f.input :duration, label: 'How long last the experience?' %>
+            <%= f.input :photo, as: :file %>
+            <%= f.button :submit, class: 'btn btn-outline-dark' %>
 
-                      <% end  %>
+            <% end  %>
 
-                    </div>
-
-                  </div>
-                <% end %>
-
-              </div>
-
-
-            </div>
           </div>
+
+        </div>
+      <% end %>
+
+    </div>
+
+
+  </div>
+</div>
