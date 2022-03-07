@@ -5,6 +5,14 @@ class ExperiencesController < ApplicationController
   def index
     @experience = Experience.new
     @experiences = policy_scope(Experience).order(created_at: :desc)
+
+
+    if params[:query].present?
+      @experiences = Experience.search_by_city(params[:query])
+    else
+      @experiences = Experience.all
+    end
+
   end
 
   def show
@@ -59,7 +67,8 @@ class ExperiencesController < ApplicationController
       :week_days,
       :starting_time,
       :duration,
-      :photo
+      :photo,
+      :city,
     )
   end
 end
