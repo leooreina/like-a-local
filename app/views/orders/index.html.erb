@@ -9,7 +9,7 @@
             <% if order.date %>
               <p><small><%= order.date.strftime('%dth %B') %></small></p>
             <% end %>
-            <p><%= order.attendees %> attendees. Criado por: <%= @users.where(id: order.user_id).first.name %></p>
+            <p><%= order.attendees %> attendees. Requested by: <%= @users.where(id: order.user_id).first.name %></p>
           </div>
 
           <div class="notification-actions">
