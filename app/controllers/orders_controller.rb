@@ -25,6 +25,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    set_order
+    @order.update(order_params)
+    redirect_to my_experiences_path
+  end
+
   def destroy
     set_order
     @order.destroy

@@ -18,6 +18,10 @@ class OrderPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    owner?
+  end
+
   def show?
     owner?
   end
