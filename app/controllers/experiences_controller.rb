@@ -17,6 +17,7 @@ class ExperiencesController < ApplicationController
 
   def show
     @order = Order.new
+    authorize @experience
   end
 
   def new
@@ -37,24 +38,26 @@ class ExperiencesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @experience
+  end
 
   def update
     @experience.update(experience_params)
-
     redirect_to experience_path(@experience)
+    authorize @experience
   end
 
   def destroy
     @experience.destroy
     redirect_to root_path
+    authorize @experience
   end
 
   private
 
   def set_experience
     @experience = Experience.find(params[:id])
-    authorize @experience
   end
 
   def set_markers
