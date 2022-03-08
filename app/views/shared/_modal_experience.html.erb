@@ -2,9 +2,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <% if @experience && policy(@experience).edit? %>
+        <% if @experience && @experience.title? %>
           <h5 class="modal-title" id="exampleModalLabel">Edit this Experience</h5>
-        <% elsif !current_page?(my_experiences_path) %>
+        <% else %>
           <h5 class="modal-title" id="exampleModalLabel">Offer an Experience</h5>
         <% end %>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -15,7 +15,7 @@
           <%= f.error_notification %>
           <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
           <div class="form-inputs">
-            <%= f.input :city, label: 'City' %>
+            <%= f.input :city %>
             <%= f.input :location, label: 'Meeting Point'%>
             <%= f.input :title %>
             <%= f.input :price %>
@@ -28,6 +28,8 @@
             <% end  %>
           </div>
         </div>
+      <% else %>
+        <%= link_to "Create experience", new_experience_path %>
       <% end %>
     </div>
   </div>
