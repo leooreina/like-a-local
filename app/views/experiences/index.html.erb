@@ -1,6 +1,5 @@
-
-
-<div class="banner" id="my-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path("trip-image.jpg") %>)">
+<div class="banner" id="my-banner"
+  style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path("trip-image.jpg") %>)">
   <div class="container">
     <h3>Experience your destination</h3>
     <h1>Like a Local</h1>
@@ -24,58 +23,61 @@
   </div>
 </div>
 
-
-<%= render 'shared/showcase' %>
+<div class="center-this">
+  <%= render 'shared/showcase' %>
+</div>
 
 
 <div class="container mt-5 px-1 experiences-list" id="all-cards">
 
-  <div class="cards mb-5">
+  <div class="cards mb-0 mt-0" >
+
+
+    <div class="search-bar d-flex justify-content-center">
+
+    <div class="form-search" id="resize-it">
+      <%= form_tag "/experiences#all-cards", method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Which city you want to experience?"
+      %>
+    </div>
+
+    <div class="search-button">
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+
+
     <% @experiences.each do |experience| %>
-      <div class="card-trip">
-        <% if experience.photo.attached? %>
-          <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
-        <% else %>
-          <%= image_tag "no-image-found.png", height: 300, width: 400, crop: :fill %>
-        <% end %>
-        <div class="card-trip-infos">
-          <div>
-            <h2><%= experience.title  %></h2>
-            <p> <strong> <%= experience.location %> </strong> </p>
-            <p> <strong> <%= experience.city %> </strong> </p>
-            <p><%= experience.description[0..90] %>... </p>
-            <%= link_to "Show more", experience_url(experience) %>
-          </div>
-          <h2 class="card-trip-pricing">R$<%= sprintf("%.2f", experience.price) %></h2>
-          <% if experience.user.avatar.attached? %>
-            <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar", alt: "avatar"%>
-          <% else %>
-            <%= image_tag "avatar.webp", class: "card-trip-user avatar-bordered" %>
-          <% end %>
+    <div class="card-trip" id="resize-cards">
+      <% if experience.photo.attached? %>
+      <%= cl_image_tag experience.photo.key, height: 300, width: 400, crop: :fill %>
+      <% else %>
+      <%= image_tag "no-image-found.png", height: 300, width: 400, crop: :fill %>
+      <% end %>
+      <div class="card-trip-infos">
+        <div>
+          <h2><%= experience.title  %></h2>
+          <p> <strong> <%= experience.location %> </strong> </p>
+          <p> <strong> <%= experience.city %> </strong> </p>
+          <p><%= experience.description[0..90] %>... </p>
+          <%= link_to "Show more", experience_url(experience) %>
         </div>
+        <h2 class="card-trip-pricing">R$<%= sprintf("%.2f", experience.price) %></h2>
+        <% if experience.user.avatar.attached? %>
+        <%= cl_image_tag experience.user.avatar.key, class: "card-trip-user avatar", alt: "avatar"%>
+        <% else %>
+        <%= image_tag "avatar.webp", class: "card-trip-user avatar-bordered" %>
+        <% end %>
       </div>
+    </div>
     <% end %>
   </div>
 
-  <div id="map" style="height: calc(100vh - 55px);"
-    data-controller="mapbox"
-    data-mapbox-markers-value="<%= @markers.to_json %>"
-    data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    <nav id="listing-group" class="listing-group">
-      <input type="checkbox" id="scrollZoom" checked="checked">
-      <label for="scrollZoom">Scroll zoom</label>
-      <input type="checkbox" id="boxZoom" checked="checked">
-      <label for="boxZoom">Box zoom</label>
-      <input type="checkbox" id="dragRotate" checked="checked">
-      <label for="dragRotate">Drag rotate</label>
-      <input type="checkbox" id="dragPan" checked="checked">
-      <label for="dragPan">Drag pan</label>
-      <input type="checkbox" id="keyboard" checked="checked">
-      <label for="keyboard">Keyboard</label>
-      <input type="checkbox" id="doubleClickZoom" checked="checked">
-      <label for="doubleClickZoom">Double click zoom</label>
-      <input type="checkbox" id="touchZoomRotate" checked="checked">
-      <label for="touchZoomRotate">Touch zoom rotate</label>
-    </nav>
+  <div id="map" style="height: calc(100vh - 55px);" data-controller="mapbox"
+    data-mapbox-markers-value="<%= @markers.to_json %>" data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 </div>

@@ -2,8 +2,10 @@
 // }
 
 #map {
-  position: sticky;
-  top: 50px;
-  margin-top: 10px;
+  position: sticky !important;
+  position: -webkit-sticky;
+  top: 0;
+  height: 90vh;
   margin-left: 25px;
+  margin-top: 15px;
 }
