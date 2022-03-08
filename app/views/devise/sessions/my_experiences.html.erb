@@ -1,12 +1,7 @@
-<div class="container my-experiences px-4">
+<div class="container my-experiences px-5">
+  <h1 class="my-5">My experiences</h1>
 
   <div class="cards mb-5">
-    <div class="experiences-title">
-      <h2 class="my-5 ml-2">My experiences</h2>
-      <div class="create-experience">
-        <%= link_to "Create experience", new_experience_path, class: 'btn btn-primary' %>
-      </div>
-    </div>
     <% if current_user.experiences && current_user.experiences.length > 0 %>
       <% current_user.experiences.each do |experience| %>
       <div class="card-trip">
@@ -39,31 +34,29 @@
     <% end %>
   </div>
 
-  <div class="container">
+  <h1 class="my-5">My orders</h1>
 
-    <h2 class="my-5">My orders</h2>
-    <% if current_user.orders.length > 0 %>
-      <% current_user.orders.each do |order| %>
-        <h5><%= order.experience.title %></h5>
-        <div class="notification">
-          <div class="notification-content">
-            <% if order.date %>
-              <p><small><%= order.date.strftime('%dth %B') %></small></p>
-            <% end %>
-            <p><%= order.attendees %> attendees.</p>
-          </div>
-
-          <div class="notification-actions">
-            <%= link_to experience_order_path(order.experience_id, order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
-              <i class="far fa-trash-alt"></i>
-            <% end %>
-          </div>
+  <% if current_user.orders.length > 0 %>
+    <% current_user.orders.each do |order| %>
+      <h5><%= order.experience.title %></h5>
+      <div class="notification w-50">
+        <div class="notification-content">
+          <% if order.date %>
+            <p><small><%= order.date.strftime('%dth %B') %></small></p>
+          <% end %>
+          <p><%= order.attendees %> attendees.</p>
         </div>
-      <% end %>
-    <% else %>
-      <p>No orders registered yet.</p>
+
+        <div class="notification-actions">
+          <%= link_to experience_order_path(order.experience_id, order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </div>
+  <% else %>
+    <p>No orders registered yet.</p>
+  <% end %>
 
 </div>
 </div>
