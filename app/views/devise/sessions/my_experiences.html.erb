@@ -1,7 +1,9 @@
-<div class="container my-experiences px-5">
-  <h1 class="my-5">My experiences</h1>
+<div class="dashboard">
 
-  <div class="cards mb-5">
+<div class="container my-experiences px-5 d-flex">
+
+  <div class="cards mb-5" id="experiences-container">
+    <h1 class="my-5">My experiences</h1>
     <% if current_user.experiences && current_user.experiences.length > 0 %>
       <% current_user.experiences.each do |experience| %>
       <div class="card-trip">
@@ -34,29 +36,33 @@
     <% end %>
   </div>
 
-  <h1 class="my-5">My orders</h1>
 
-  <% if current_user.orders.length > 0 %>
-    <% current_user.orders.each do |order| %>
-      <h5><%= order.experience.title %></h5>
-      <div class="notification w-50">
-        <div class="notification-content">
-          <% if order.date %>
-            <p><small><%= order.date.strftime('%dth %B') %></small></p>
-          <% end %>
-          <p><%= order.attendees %> attendees.</p>
-        </div>
 
-        <div class="notification-actions">
-          <%= link_to experience_order_path(order.experience_id, order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
-            <i class="far fa-trash-alt"></i>
-          <% end %>
+  <div id="orders-container">
+    <h1 class="my-5">My orders</h1>
+
+    <% if current_user.orders.length > 0 %>
+      <% current_user.orders.each do |order| %>
+        <h5><%= order.experience.title %></h5>
+        <div class="notification w-50">
+          <div class="notification-content">
+            <% if order.date %>
+              <p><small><%= order.date.strftime('%dth %B') %></small></p>
+            <% end %>
+            <p><%= order.attendees %> attendees.</p>
+          </div>
+
+          <div class="notification-actions">
+            <%= link_to experience_order_path(order.experience_id, order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
+    <% else %>
+      <p>No orders registered yet.</p>
     <% end %>
-  <% else %>
-    <p>No orders registered yet.</p>
-  <% end %>
+  </div>
 
-  <%= render 'shared/modal_experience' %>
+</div>
 </div>
