@@ -30,6 +30,7 @@
 <div class="show-body mb-5">
   <div class="my-container">
     <div class="container row mt-5">
+      <p><strong>City:</strong> <%= @experience.city %></p>
       <p><strong>Location:</strong> <%= @experience.location %></p>
       <p><strong>Price: </strong>R$<%= sprintf("%.2f", @experience.price) %></p>
       <p><strong>Availability: </strong><%= @experience.week_days %></p>

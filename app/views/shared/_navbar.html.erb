@@ -11,23 +11,31 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item">
-            <% if @experience && policy(@experience).edit? && policy(@experience).destroy? %>
-              <span class="nav-link" data-bs-toggle="modal" data-bs-target="#new" role="button">
-                Edit Experience
-              </span>
+          <% if @experience && (policy(@experience).edit? || policy(@experience).destroy?) %>
+            <% if policy(@experience).edit? %>  
+              <li class="nav-item">
+                <span class="nav-link" data-bs-toggle="modal" data-bs-target="#new" role="button">
+                  Edit Experience
+                </span>
+              </li>
+            <% end %>
+            <% if policy(@experience).destroy? %>
               <li class="nav-item" role="button">
                 <%= link_to "Delete Experience", experience_path(@experience),
                     method: :delete,
                     data: { confirm: "Are you sure?" },
                     class: "nav-link" %>
               </li>
-            <% else %>
-              <span class="nav-link" data-bs-toggle="modal" data-bs-target="#new" role="button">
-                Offer an experience
-              </span>
             <% end %>
-          </li>
+          <% else %>
+            <% if current_page?(experiences_path) || current_page?(root_path) %>  
+              <li class="nav-item" role="button">
+                <span class="nav-link" data-bs-toggle="modal" data-bs-target="#new" role="button">
+                  Offer an experience
+                </span>
+              </li>
+            <% end %>
+          <% end %>
           <li class="nav-item">
             <span class="nav-link disabled">
               <%= current_user.name %>
@@ -45,7 +53,6 @@
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
-
         <% else %>
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
