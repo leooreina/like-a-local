@@ -43,7 +43,7 @@
     <% if current_user.orders.length > 0 %>
       <% current_user.orders.each do |order| %>
         <h5><%= order.experience.title %></h5>
-        <div class="notification w-50">
+        <div class="notification">
           <div class="notification-content">
             <% if order.date %>
               <p><small><%= order.date.strftime('%dth %B') %></small></p>
@@ -52,15 +52,15 @@
           </div>
 
           <div class="notification-actions">
-            <i class="fas fa-pencil-alt" data-bs-toggle="modal" data-bs-target="#order">
-              <%= link_to " ", experience_order_path(order.experience_id, order)%>
+            <i class="fas fa-pencil-alt" data-bs-toggle="modal" data-bs-target="<%= "#order#{order.id}" %>">
+              <%= link_to " ", experience_order_path(order.experience_id, order.id), method: :patch %>
             </i>
-            <%= link_to experience_order_path(order.experience_id, order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
+            <%= link_to experience_order_path(order.experience_id, order.id), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
               <i class="far fa-trash-alt"></i>
             <% end %>
           </div>
         </div>
-          <%= render 'shared/modal_order', order: order %>
+        <%= render 'shared/modal_order', order: order %>
       <% end %>
 
     <% else %>
