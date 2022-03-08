@@ -54,9 +54,9 @@ ActiveRecord::Schema.define(version: 2022_03_07_192012) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.time "starting_time"
+    t.string "city"
     t.float "latitude"
     t.float "longitude"
-    t.string "city"
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
