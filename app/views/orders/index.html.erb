@@ -1,33 +1,28 @@
-<div class="container my-experiences">
-  <% if current_user.id != @experience.user_id %>
-    <h2>My orders</h2>
-  <% else %>
-    <h2>Orders registered</h2>
-  <% end %>
-  <% if @orders.where(experience_id: params[:experience_id]).length > 0 %>
-    <h5><%= @experience.title %></h5>
-    <% @orders.where(experience_id: params[:experience_id]).each do |order| %>
-      <div class="notification w-50">
-        <div class="notification-content">
-          <% if order.date %>
-            <p><small><%= order.date.strftime('%dth %B') %></small></p>
-          <% end %>
-          <p><%= order.attendees %> attendees. Criado por: <%= @users.where(id: order.user_id).first.name %></p>
-        </div>
+<div class="container orders">
+  <div>
+    <h2 class="mb-5">Orders registered</h2>
+    <h5 class="mb-3"><%= @experience.title %></h5>
+    <% if @orders.where(experience_id: params[:experience_id]).length > 0 %>
+      <% @orders.where(experience_id: params[:experience_id]).each do |order| %>
+        <div class="notification w-50">
+          <div class="notification-content">
+            <% if order.date %>
+              <p><small><%= order.date.strftime('%dth %B') %></small></p>
+            <% end %>
+            <p><%= order.attendees %> attendees. Criado por: <%= @users.where(id: order.user_id).first.name %></p>
+          </div>
 
-        <div class="notification-actions">
-            <%= link_to experience_order_path(params[:experience_id], order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
-              <i class="far fa-trash-alt"></i>
-          <% end %>
+          <div class="notification-actions">
+              <%= link_to experience_order_path(params[:experience_id], order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
+                <i class="far fa-trash-alt"></i>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
+    <% else %>
+      <p>No orders registered yet.</p>
     <% end %>
-  <% else %>
-    <p>No orders registered yet.</p>
-  <% end %>
-
-  <% if current_user.id != @experience.user_id %>
-    <%= link_to "Add", experience_path(params[:experience_id]) %>
-  <% end %>
-  <%= link_to "Back", my_experiences_path %>
+  </div>
+  
+  <%= link_to "Back", my_experiences_path, class: 'mt-5 btn btn-primary' %>
 </div>
