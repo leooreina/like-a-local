@@ -48,6 +48,9 @@
         </div>
 
         <div class="notification-actions">
+          <button type="button"  class="fas fa-pencil-alt" data-bs-toggle="modal" data-bs-target="#order">
+            Edit
+          </button>
           <%= link_to experience_order_path(order.experience_id, order), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
             <i class="far fa-trash-alt"></i>
           <% end %>
@@ -57,6 +60,6 @@
   <% else %>
     <p>No orders registered yet.</p>
   <% end %>
-
+  <%= render 'shared/modal_order' %>
   <%= render 'shared/modal_experience' %>
 </div>

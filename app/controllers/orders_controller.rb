@@ -25,6 +25,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def edit
+    set_order
+    @order.edit(order_params)
+    authorize @order
+  end
+
   def destroy
     set_order
     @order.destroy
