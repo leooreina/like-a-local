@@ -25,10 +25,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit
+  def update
     set_order
-    @order.edit(order_params)
-    authorize @order
+    @order.update(order_params)
+    redirect_to my_experiences_path
   end
 
   def destroy
